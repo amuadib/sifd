@@ -776,6 +776,8 @@ new #[Title('Katalog File')] class extends Component
                                     <div class="flex size-10 shrink-0 items-center justify-center rounded-lg {{ $file->is_directory ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200' }} font-bold uppercase text-xs">
                                         @if($file->is_directory)
                                             <flux:icon icon="folder" class="size-6" />
+                                        @elseif($file->extension == 'safetensors')
+                                            <flux:icon icon="light-bulb" class="size-6" />
                                         @else
                                             {{ $file->extension }}
                                         @endif
@@ -832,9 +834,6 @@ new #[Title('Katalog File')] class extends Component
                             </flux:button>
                             <flux:button size="xs" :href="route('files.show', $file->id)" wire:navigate>
                                 {{ __('Lihat Detail') }}
-                            </flux:button>
-                            <flux:button size="xs" variant="danger" icon="trash" wire:click="confirmDelete('{{ $file->id }}')" title="{{ __('Hapus dari Katalog') }}">
-                                {{ __('Hapus') }}
                             </flux:button>
                         </div>
                     </flux:card>
